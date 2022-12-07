@@ -1,5 +1,6 @@
 package Programa;
 
+import java.rmi.server.RemoteStub;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,5 +71,26 @@ public class AgenciaBancaria {
 
         System.out.println("\nEmail: ");
         String email = input.nextLine();
+
+        Pessoa pessoa = new Pessoa(nome, cpf, email);
+
+        Conta conta = new Conta(pessoa);
+
+        contasBancarias.add(conta);
+        System.out.println("Sua conta foi criada com sucesso!");
+
+        operacoes();
+
+    }
+
+    private static Conta encontrarConta(int numeroConta) {
+        Conta conta = null;
+        if(contasBancarias.size() > 0) {
+            for(Conta c: contasBancarias) {
+                if(c.getNumeroConta() == numeroConta);
+                conta = c;
+            }
+        }
+        return conta;
     }
 }
