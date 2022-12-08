@@ -93,4 +93,21 @@ public class AgenciaBancaria {
         }
         return conta;
     }
+
+    public static void depositar() {
+        System.out.println("Número da conta: ");
+        int numeroConta = input.nextLine();
+
+        Conta conta = encontrarConta(numeroConta);
+
+        if(conta != null) {
+            System.out.println("Qual valor deseja depositar? ");
+            Double valorDeposito = input.nextDouble();
+            conta.depositar(valorDeposito);
+            System.out.println("O valor foi depositado com sucesso! ");
+        }else {
+            System.out.println("Conta não encontrada! ");
+        }
+        operacoes();
+    }
 }
