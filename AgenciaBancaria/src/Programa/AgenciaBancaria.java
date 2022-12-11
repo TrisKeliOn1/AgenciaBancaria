@@ -1,8 +1,9 @@
 package Programa;
 
-import java.rmi.server.RemoteStub;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 
 public class AgenciaBancaria {
     static Scanner input = new Scanner(System.in);
@@ -56,21 +57,20 @@ public class AgenciaBancaria {
 
             default:
                 System.out.println("Opção inválida!");
-                operacao();
+                operacoes();
                 break;
         }
     }
 
     public static void criarConta() {
-
         System.out.println("\nNome: ");
-        String nome = input.nextLine();
+        String nome = input.next();
 
         System.out.println("\nCPF: ");
-        String cpf = input.nextLine();
+        String cpf = input.next();
 
         System.out.println("\nEmail: ");
-        String email = input.nextLine();
+        String email = input.next();
 
         Pessoa pessoa = new Pessoa(nome, cpf, email);
 
@@ -87,8 +87,9 @@ public class AgenciaBancaria {
         Conta conta = null;
         if(contasBancarias.size() > 0) {
             for(Conta c: contasBancarias) {
-                if(c.getNumeroConta() == numeroConta);
-                conta = c;
+                if(c.getNumeroConta() == numeroConta); {
+                    conta = c;
+                }
             }
         }
         return conta;
@@ -121,7 +122,6 @@ public class AgenciaBancaria {
             System.out.println("Qual valor deseja sacar? ");
             Double valorSaque = input.nextDouble();
             conta.sacar(valorSaque);
-            System.out.println("Valor sacado com sucesso! ");
         }else {
             System.out.println("Conta não entcontrada! ");
         }
@@ -145,9 +145,24 @@ public class AgenciaBancaria {
                 Double valor = input.nextDouble();
 
                 contaRemetente.transferir(contaDestinatario, valor);
-
+            }else {
+                System.out.println("A conta para depósito não foi encontrada");
             }
+        }else {
+            System.out.println("Conta para transferência não encontrada");
         }
+        operacoes();
+    }
+
+    public static void listarContas() {
+        if(contasBancarias.size() > 0) {
+            for(Conta conta: contasBancarias) {
+                System.out.println(conta);
+            }
+        }else {
+            System.out.println("--- Não há contas cadastradas ---");
+        }
+
         operacoes();
     }
 }
